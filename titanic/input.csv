@@ -1,0 +1,11 @@
+PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Embarked
+1,0,3,"Owen Harris Braund",male,22,1,0,"A/5 21171",7.25,S
+2,1,1,"Florence Briggs Thayer Cumings",female,38,1,0,"PC 17599",71.2833,C
+3,1,3,"Laina Heikkinen",female,26,0,0,"STON/O 2. 3101280",7.925,S
+4,0,1,"Jacques Heath Futrelle",female,35,0,0,"113803",53.1,S
+5,0,3,"William Henry Allen",male,35,0,0,"373450",8.05,S
+6,0,3,"James Moran",male,40,0,0,"330877",8.05,Q
+7,0,1,"Timothy J McCarthy",male,54,0,0,"17463",51.8625,S
+8,1,3,"Gosta Leonard Palsson",male,2,3,1,"349240",21.075,S
+9,1,2,"Elisabeth Vilhelmina Berg Johnson",female,27,0,2,"347742",11.1333,S
+10,0,3,"Adele Achem Nasser",female,33,0,0,"C.A. 5547",16.7,S
