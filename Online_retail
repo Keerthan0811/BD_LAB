@@ -1,0 +1,43 @@
+Write Pig Latin scripts for the following on Online Retail Dataset.
+Total number of unique customers in the "United Kingdom".
+Find total invoices generated in the year 2009.
+Generate the total revenue collected from Country="France".
+Find the country in which maximum number of items were sold.
+
+   raw_data = LOAD 'online-retail.csv' USING PigStorage(',')
+   AS (InvoiceNo:chararray, StockCode:chararray, Description:chararray,
+  Quantity:int, InvoiceDate:chararray, UnitPrice:float,
+   CustomerID:chararray, Country:chararray);
+
+Total number of unique customers in the "United Kingdom".
+filtered_data = FILTER raw_data BY Country == 'United Kingdom';
+unique_customers = DISTINCT (FOREACH filtered_data GENERATE CustomerID);
+total_unique_customers = FOREACH (GROUP unique_customers ALL) GENERATE
+COUNT(unique_customers) AS TotalUniqueCustomers;
+DUMP total_unique_customers;
+Output: 15
+Find total invoices generated in the year 2009.
+
+filtered_data = FILTER raw_data BY InvoiceDate == '2009';
+grouped_by_invoice = GROUP filtered_data BY InvoiceNo;
+total_invoices = FOREACH (GROUP grouped_by_invoice ALL) GENERATE
+COUNT(grouped_by_invoice) AS TotalInvoices;
+DUMP total_invoices;
+Output:3
+
+Generate the total revenue collected from Country="France".
+
+france_data = FILTER raw_data BY Country == 'France';
+france_revenue = FOREACH france_data GENERATE (Quantity * UnitPrice) AS Revenue;
+total_revenue = FOREACH (GROUP france_revenue ALL) GENERATE SUM(france_revenue.Revenue) AS TotalRevenue;
+DUMP total_revenue;
+Output: 177.47999954223633
+
+Find the country in which maximum number of items were sold.
+grouped_by_country = GROUP raw_data BY Country;
+country_totals = FOREACH grouped_by_country GENERATE group AS Country,
+SUM(raw_data.Quantity) AS TotalQuantity;
+sorted_totals = ORDER country_totals BY TotalQuantity DESC;
+max_country = LIMIT sorted_totals 1;
+DUMP max_country;
+Output: United Kingdom,1815
